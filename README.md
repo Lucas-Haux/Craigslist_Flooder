@@ -7,7 +7,7 @@ alt="Showing a Craigslist scammer who's boss using Python thumbnail" width="240"
 
 This is a really good video, I enjoyed it a lot. While watching the video, I was thinking about the effectiveness of the program and how it will impact the scammer. I concluded that it will likely not cause any major damage due to the false information that is being flooded looking too fake. 
 
-Identification of the problems and solution to fix or improve:
+### Identification of the problems and solution to fix or improve:
 - Fake emails are all organized the same, following the order; first name, number, @[domain name].
 - I will improve this by adding more data points, and arranging it randomly.
 - Fake emails start with all lower case male first name.
