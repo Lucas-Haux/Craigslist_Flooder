@@ -14,6 +14,12 @@ This is a really good video, I enjoyed it a lot. While watching the video, I was
 - Fake passwords are too random and eight characters long
   - I improved by randomaizing emails with names, nicknames, dates, and hobbies. With different capitalization.
 
+### Comparison: 
+Engineer Man:
+<img src="https://i.imgur.com/oMXi93A.png" width="150" height="280">
+
+Improved version:
+<img src="https://i.imgur.com/05f6ioQ.png" width="150" height="280">
 
 **Disclaimer:** I did not run nor recommend running this program. A flooding tool is considered an attack and may be illegal in your country. 
 
