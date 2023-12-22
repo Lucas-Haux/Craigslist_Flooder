@@ -1,33 +1,19 @@
-use shuffle::shuffler::Shuffler;
-use shuffle::irs::Irs;
-use rand::rngs::mock::StepRng;
-use std::time::Duration;
-use std::thread;
 use std::fs;
 use rand::prelude::*;
-use std::error::Error;
-use csv::{ReaderBuilder, Trim};
-use std::fmt::Display;
+use csv::{ReaderBuilder};
 
 fn main() {
+    let mut i = 0;
+    while i < 100 {
+        println!("email: {}, and password: {}" , _make_email(), _make_password());
+        //println!("password: {}" , _make_password());
+        i += 1;
+    };
 
-   _make_email();
-
-    //println!("test: {}", _ran_nicknames());
-
-    /*
-    let username = _ran_name;
-    println!("username {}", username);
-    let mut fake_email = String::new();
-
-
-    fake_email.push_str("test");
-    println!("fake_email: {}", fake_email);
-    */
 }
 
-fn _make_email() {
-    let mut email: &str;
+fn _make_password() -> String {
+    let mut password: String = Default::default();
     let mut rng = thread_rng();
 
     let mut data_point_amount: u32 = 0;
@@ -37,7 +23,7 @@ fn _make_email() {
     let mut hobbie: bool = false;
     let mut nickname: bool = false;
     
-    // determins how many data points should be in the email
+    // determins how many data points should be in the password
     let random: u32 = rng.gen_range(0..=100);
     match random {
         0..=50 => data_point_amount = 2,
@@ -45,8 +31,7 @@ fn _make_email() {
         76..=100 => data_point_amount = 4,
         101_u32..=u32::MAX => todo!(),
     }
-    println!("data_point_amount: {}", data_point_amount);
-    while true {
+    loop {
         let data_point: u32 = rng.gen_range(0..=100);
         match data_point {
             0..=40 => {
@@ -76,30 +61,117 @@ fn _make_email() {
             101_u32..=u32::MAX => todo!(),
         }
         if data_point_amount == loop_counter {
-            println!("name: {} date: {} hobbie: {} nickname: {}", name, date, hobbie, nickname);
-            println!("loop_counter: {}", loop_counter);
             break;
         }
     }
-    /*
-    let email_name: &str = &_ran_name();
-    let email_date: &str = &_ran_date();
-    let email_hobbie: &str = &_ran_hobbies();
-    let email: &str = &(email_name.to_owned() + email_date + email_hobbie);
-    println!("email: {:#?}", email);
-    */
-    
-    let mut rng = StepRng::new(2, 13);
-    let mut irs = Irs::default();
-    
-    let mut input = vec![1, 2, 3, 4, 5];
-    
-    irs.shuffle(&mut input, &mut rng);
-    assert_eq!(&input, &[4, 1, 5, 3, 2]);
-    for (index, &input) in input.iter().enumerate() {
-        // Do something with each index and number
-        println!("Index: {}, Number: {}", index, input);
+
+    let mut rng = thread_rng();
+    let mut y = [1, 2, 3, 4];
+    y.shuffle(&mut rng);
+    for y in y {
+        match y {
+            1 => 
+            if name == true {
+                password.push_str(&_ran_name());
+            },
+            2 =>
+            if date == true {
+                password.push_str(&_ran_date());
+            },
+            3 =>
+            if hobbie == true {
+                password.push_str(&_ran_hobbies());
+            },
+            4 => 
+            if nickname == true {
+                password.push_str(&_ran_nicknames());
+            },
+            i32::MIN..=0_i32 | 5_i32..=i32::MAX => todo!(),
+        }
     }
+    password
+}
+
+fn _make_email() -> String {
+    let mut email: String = Default::default();
+    let mut rng = thread_rng();
+
+    let mut data_point_amount: u32 = 0;
+    let mut loop_counter: u32 = 0;
+    let mut name: bool = false;
+    let mut date: bool = false;
+    let mut hobbie: bool = false;
+    let mut nickname: bool = false;
+    
+    // determins how many data points should be in the email
+    let random: u32 = rng.gen_range(0..=100);
+    match random {
+        0..=50 => data_point_amount = 2,
+        51..=75 => data_point_amount = 3,
+        76..=100 => data_point_amount = 4,
+        101_u32..=u32::MAX => todo!(),
+    }
+    loop {
+        let data_point: u32 = rng.gen_range(0..=100);
+        match data_point {
+            0..=40 => {
+                if name != true {
+                    name = true;
+                    loop_counter +=1;
+                }
+            }
+            41..=60 => {
+                if date != true {
+                    date = true;
+                    loop_counter +=1;
+                }
+            }
+            61..=80 => {
+                if hobbie != true {
+                    hobbie = true;
+                    loop_counter +=1;
+                }
+            }
+            81..=100 => {
+                if nickname != true {
+                    nickname = true;
+                    loop_counter +=1;
+                }
+            }
+            101_u32..=u32::MAX => todo!(),
+        }
+        if data_point_amount == loop_counter {
+            break;
+        }
+    }
+
+    let mut rng = thread_rng();
+    let mut y = [1, 2, 3, 4];
+    y.shuffle(&mut rng);
+    for y in y {
+        match y {
+            1 => 
+            if name == true {
+                email.push_str(&_ran_name());
+            },
+            2 =>
+            if date == true {
+                email.push_str(&_ran_date());
+            },
+            3 =>
+            if hobbie == true {
+                email.push_str(&_ran_hobbies());
+            },
+            4 => 
+            if nickname == true {
+                email.push_str(&_ran_nicknames());
+            },
+            i32::MIN..=0_i32 | 5_i32..=i32::MAX => todo!(),
+        }
+    }
+
+    email.push_str(&_ran_domain());
+    email
 }
 
 fn _ran_name() -> String {
@@ -144,7 +216,6 @@ fn _ran_name() -> String {
     // Grab everything until the 4th comma
     if let Some(temp_name) = fields.next() {
         name = temp_name.to_string();
-        println!("Result: {}", name);
     } else {
         // Handle case where there are not enough commas
         println!("Not enough commas in the input string.");
@@ -158,6 +229,15 @@ fn _ran_name() -> String {
             println!("Not enough commas in the input string.");
             return String::new();
         }
+    }
+    
+    let mut rng = thread_rng();
+    let style = rng.gen_range(1..4);
+    match style {
+        1 => name = name.to_uppercase(),
+        2..=3 => name = uppercase_first_letter(&name),
+        2..=4 => name = name.to_lowercase(),
+        i32::MIN..=0_i32 | 5_i32..=i32::MAX => todo!(),
     }
     name
 }
@@ -185,12 +265,11 @@ fn _ran_date() -> String {
     }
 
     date = millennium + decade;
-    println!("date: {}", date);
     date.to_string()
 }
 
 fn _ran_domain() -> String {
-    let mut domain = String::new();
+    let mut domain = Default::default();
     let mut rng = thread_rng();
 
     let random: u32 = rng.gen_range(0..=100);
@@ -206,28 +285,51 @@ fn _ran_domain() -> String {
 }
 
 fn _ran_hobbies() -> String {
-
+    let mut hobbie: String = Default::default();
     let rdr = ReaderBuilder::new()
     .from_path("/home/luke/Rust/cli_programs/Craigslist_Flooder/Craigslist_Flooder/data/hobbies.csv");
     if let Some(result) = rdr.expect("REASON").records().choose(&mut rand::thread_rng()) {
         let message = result.as_ref().expect("REASON").as_slice().to_owned();
-        println!("{}", message);
-        message
-    } else {
-        "No hobbies found".to_owned()
+        hobbie = message;
+    };
+
+    let mut rng = thread_rng();
+    let style = rng.gen_range(1..=4);
+    match style {
+        1 => hobbie = hobbie.to_uppercase(),
+        2..=3 => hobbie = uppercase_first_letter(&hobbie),
+        4 => hobbie = hobbie.to_lowercase(),
+        i32::MIN..=0_i32 | 5_i32..=i32::MAX => todo!(),
     }
-    //println!("hobbie: {}", hobbie);
+    hobbie
 }
 
 fn _ran_nicknames() -> String  {
+    let mut nickname: String = Default::default();
 
     let rdr = ReaderBuilder::new()
     .from_path("/home/luke/Rust/cli_programs/Craigslist_Flooder/Craigslist_Flooder/data/Nicknames.csv");
     if let Some(result) = rdr.expect("REASON").records().choose(&mut rand::thread_rng()) {
         let message = result.as_ref().expect("REASON").as_slice().to_owned();
-        println!("{}", message);
-        message
-    } else {
-        "No hobbies found".to_owned()
+        nickname = message;
+    };
+
+    let mut rng = thread_rng();
+    let style = rng.gen_range(1..=4);
+    match style {
+        1 => nickname = nickname.to_uppercase(),
+        2..=3 => nickname = uppercase_first_letter(&nickname),
+        4 => nickname = nickname.to_lowercase(),
+        i32::MIN..=0_i32 | 5_i32..=i32::MAX => todo!(),
+    }
+    nickname
+
+}
+
+fn uppercase_first_letter(s: &str) -> String {
+    let mut c = s.chars();
+    match c.next() {
+        None => String::new(),
+        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
     }
 }
