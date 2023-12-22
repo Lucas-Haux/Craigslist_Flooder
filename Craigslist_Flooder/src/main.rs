@@ -1,3 +1,8 @@
+use shuffle::shuffler::Shuffler;
+use shuffle::irs::Irs;
+use rand::rngs::mock::StepRng;
+use std::time::Duration;
+use std::thread;
 use std::fs;
 use rand::prelude::*;
 use std::error::Error;
@@ -6,9 +11,9 @@ use std::fmt::Display;
 
 fn main() {
 
-   // _ran_hobbies();
+   _make_email();
 
-    println!("test: {}", _ran_hobbies());
+    //println!("test: {}", _ran_nicknames());
 
     /*
     let username = _ran_name;
@@ -19,6 +24,82 @@ fn main() {
     fake_email.push_str("test");
     println!("fake_email: {}", fake_email);
     */
+}
+
+fn _make_email() {
+    let mut email: &str;
+    let mut rng = thread_rng();
+
+    let mut data_point_amount: u32 = 0;
+    let mut loop_counter: u32 = 0;
+    let mut name: bool = false;
+    let mut date: bool = false;
+    let mut hobbie: bool = false;
+    let mut nickname: bool = false;
+    
+    // determins how many data points should be in the email
+    let random: u32 = rng.gen_range(0..=100);
+    match random {
+        0..=50 => data_point_amount = 2,
+        51..=75 => data_point_amount = 3,
+        76..=100 => data_point_amount = 4,
+        101_u32..=u32::MAX => todo!(),
+    }
+    println!("data_point_amount: {}", data_point_amount);
+    while true {
+        let data_point: u32 = rng.gen_range(0..=100);
+        match data_point {
+            0..=40 => {
+                if name != true {
+                    name = true;
+                    loop_counter +=1;
+                }
+            }
+            41..=60 => {
+                if date != true {
+                    date = true;
+                    loop_counter +=1;
+                }
+            }
+            61..=80 => {
+                if hobbie != true {
+                    hobbie = true;
+                    loop_counter +=1;
+                }
+            }
+            81..=100 => {
+                if nickname != true {
+                    nickname = true;
+                    loop_counter +=1;
+                }
+            }
+            101_u32..=u32::MAX => todo!(),
+        }
+        if data_point_amount == loop_counter {
+            println!("name: {} date: {} hobbie: {} nickname: {}", name, date, hobbie, nickname);
+            println!("loop_counter: {}", loop_counter);
+            break;
+        }
+    }
+    /*
+    let email_name: &str = &_ran_name();
+    let email_date: &str = &_ran_date();
+    let email_hobbie: &str = &_ran_hobbies();
+    let email: &str = &(email_name.to_owned() + email_date + email_hobbie);
+    println!("email: {:#?}", email);
+    */
+    
+    let mut rng = StepRng::new(2, 13);
+    let mut irs = Irs::default();
+    
+    let mut input = vec![1, 2, 3, 4, 5];
+    
+    irs.shuffle(&mut input, &mut rng);
+    assert_eq!(&input, &[4, 1, 5, 3, 2]);
+    for (index, &input) in input.iter().enumerate() {
+        // Do something with each index and number
+        println!("Index: {}, Number: {}", index, input);
+    }
 }
 
 fn _ran_name() -> String {
@@ -138,3 +219,15 @@ fn _ran_hobbies() -> String {
     //println!("hobbie: {}", hobbie);
 }
 
+fn _ran_nicknames() -> String  {
+
+    let rdr = ReaderBuilder::new()
+    .from_path("/home/luke/Rust/cli_programs/Craigslist_Flooder/Craigslist_Flooder/data/Nicknames.csv");
+    if let Some(result) = rdr.expect("REASON").records().choose(&mut rand::thread_rng()) {
+        let message = result.as_ref().expect("REASON").as_slice().to_owned();
+        println!("{}", message);
+        message
+    } else {
+        "No hobbies found".to_owned()
+    }
+}
