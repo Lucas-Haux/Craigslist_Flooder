@@ -1,0 +1,5 @@
+# Ignore compiled binaries
+/target/
+# Ignore build output
+Cargo.lock
+
