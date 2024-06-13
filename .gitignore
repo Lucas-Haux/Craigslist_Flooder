@@ -1,7 +1,10 @@
 # Ignore compiled binaries
 Craiglist_Flooder/target/*
 debug/
+Craiglist_Flooder/target/
 target/
+target/*
+
 # Ignore build output
 Cargo.lock
 
