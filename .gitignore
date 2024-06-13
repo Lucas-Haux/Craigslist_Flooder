@@ -1,5 +1,7 @@
 # Ignore compiled binaries
-/Craiglist_Flooder/target/*
+Craiglist_Flooder/target/*
+debug/
+target/
 # Ignore build output
 Cargo.lock
 
