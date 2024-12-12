@@ -9,20 +9,20 @@ This is a really good video, I enjoyed it a lot. While watching the video, I was
 
 ### The problems and how I fixed them:
 - Fake emails are all organized the same, following the order: first name, number, @[domain name].
-  - I improved by randomaizing emails with names, nicknames, dates, and hobbies. With different capitalization.
-  - I improved this by randomizing the email domains. Email domain usage is based on popularity of said email domain. 
+  - I improved this by randomaizing emails with names, nicknames, dates, and hobbies. With different capitalization.
+    - The ussage of each email domain is based on popularity of the email domain. 
 - Fake passwords are too random and eight characters long
-  - I improved by randomaizing emails with names, nicknames, dates, and hobbies. With different capitalization.
+  - I improved this by randomaizing the passwords with names, nicknames, dates, and hobbies and with different capitalization. This makes the passwords look more real.
 
 ### Comparison: 
-Engineer Man:
+Engineer Man Out Put:
 
 <img src="https://i.imgur.com/oMXi93A.png" width="300" height="500">
 
-Improved version:
+My Improved Version:
 
 <img src="https://i.imgur.com/Cpv46za.png" width="500" height="500">
 
-**Disclaimer:** I did not run nor recommend running this program. A flooding tool is considered an attack and may be illegal in your country. 
+**Disclaimer:** I did not run nor do I recommend running this program. A flooding tool is considered an attack and may be illegal in your country. 
 
 ###### This program is a learning activity, please don't deploy. 
