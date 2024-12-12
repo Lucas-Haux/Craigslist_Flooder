@@ -15,7 +15,7 @@ This is a really good video, I enjoyed it a lot. While watching the video, I was
   - I improved this by randomaizing the passwords with names, nicknames, dates, and hobbies and with different capitalization. This makes the passwords look more real.
 
 ### Comparison: 
-Engineer Man Out Put:
+Engineer Man:
 
 <img src="https://i.imgur.com/oMXi93A.png" width="300" height="500">
 
